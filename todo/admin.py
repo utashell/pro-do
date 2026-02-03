@@ -2,4 +2,12 @@ from django.contrib import admin
 
 from . import models
 
-admin.site.register(models.Todo)
+
+@admin.register(models.Todo)
+class Todoadmin(admin.ModelAdmin):
+    list_display = ('title', 'status_colored', 'is_done', 'priority', 'created_at')
+    list_filter = ('is_done', 'priority', 'created_at')
+    search_fields = ('title', 'description')
+    list_editable = ('is_done',)
+    ordering = ('-created_at',)
+    
