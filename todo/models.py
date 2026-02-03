@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.html import format_html
+from django.contrib.auth.models import User
 
 
 class Todo(models.Model):
@@ -19,7 +20,7 @@ class Todo(models.Model):
     due_date = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks')
     
     class Meta:
         verbose_name = 'Task'
